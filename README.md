@@ -253,5 +253,5 @@ class ServicoPrestadorSeeder extends Seeder
 ### Conclusão
 
 Se precisar de mais detalhes ou ajuda com alguma parte específica do projeto, estarei à disposição! 
-Feito com ❤️ por Luciana Pessoa 👋🏽 Entre em contato!
+Feito com ❤️ por Luciana Pessoa 👋🏽 
 
