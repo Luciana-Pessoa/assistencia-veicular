@@ -64,51 +64,6 @@ php artisan serve
 ```
 A aplicação estará disponível em http://localhost:8000.
 
-# Endpoints
-Autenticação
-POST /api/login
-
-Descrição: Autenticação de usuário.
-
-Body:
-```
-{
-  "email": "user@example.com",
-  "password": "password"
-}
-```
-Response:
-```
-{
-  "token": "jwt_token",
-  "user": "username"
-}
-
-```
-Listar Serviços
-GET /api/servicos
-
-Descrição: Listar serviços disponíveis.
-Headers:
-```
-{Authorization: Bearer {jwt_token}
-
-}
-
-```
-Response:
-```
-[
-  {
-    "id": 1,
-    "nome": "Reboque",
-    "situacao": "ativo"
-  },
-  ...
-]
-```
-
-
 
 
 
