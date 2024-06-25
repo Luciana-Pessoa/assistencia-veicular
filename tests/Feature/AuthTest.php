@@ -6,6 +6,13 @@ class AuthTest extends TestCase
 {
     use Illuminate\Foundation\Testing\RefreshDatabase;
 
+    class AuthTest extends TestCase
+    {
+        use RefreshDatabase;
+
+        // Rest of the code...
+    }
+
     public function test_user_can_login_with_correct_credentials()
     {
         $user = User::factory()->create([
