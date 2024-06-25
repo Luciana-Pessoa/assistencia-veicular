@@ -1,4 +1,3 @@
-
 # Assistência Veicular API
 
 ## Pré-requisitos
@@ -150,17 +149,3 @@ Authorization: Bearer {jwt_token}
   ...
 ]
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
