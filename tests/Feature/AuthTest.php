@@ -1,88 +1,50 @@
 <?php
-namespace Tests\Feature;
 
-use App\Models\User;
-class AuthTest extends TestCase
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+/**
+ * Factory para a criação de usuários.
+ */
+class UserFactory extends Factory
 {
-    use Illuminate\Foundation\Testing\RefreshDatabase;
+    /**
+     * A senha padrão para todos os usuários criados pela fábrica, se não for especificada.
+     *
+     * @var string|null
+     */
+    protected static $password;
 
-    class AuthTest extends TestCase
+    /**
+     * Define o estado padrão do modelo.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
     {
-        use RefreshDatabase;
-
-        // Rest of the code...
+        return [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ];
     }
 
-    public function test_user_can_login_with_correct_credentials()
+    /**
+     * Indica que o endereço de email do modelo deve estar não verificado.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function unverified()
     {
-        $user = User::factory()->create([
-            'email' => 'test@example.com',
-            'password' => bcrypt('password')
-        ]);
-
-        $response = $this->postJson('/api/login', [
-            'email' => 'test@example.com',
-            'password' => 'password'
-        ]);
-
-        $response->assertStatus(200)
-                 ->assertJsonStructure(['token', 'user']);
-    }
-
-    public function test_user_cannot_login_with_incorrect_credentials()
-    {
-        $user = User::factory()->create([
-            'email' => 'test@example.com',
-            'password' => bcrypt('password')
-        ]);
-
-        $response = $this->postJson('/api/login', [
-            'email' => 'test@example.com',
-            'password' => 'wrongpassword'
-        ]);
-
-        $response->assertStatus(401)
-                 ->assertJson(['error' => 'Unauthorized']);
-    }
-}
-
-use Tests\TestCase;
-use App\Models\User as UserModel; // Provide an alias for the conflicting class
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-class AuthTest extends TestCase
-{
-    use RefreshDatabase;
-
-    public function test_user_can_login_with_correct_credentials()
-    {
-        $user = UserModel::factory()->create([ // Use the alias instead of 'User'
-            'email' => 'test@example.com',
-            'password' => bcrypt('password')
-        ]);
-
-        $response = $this->postJson('/api/login', [
-            'email' => 'test@example.com',
-            'password' => 'password'
-        ]);
-
-        $response->assertStatus(200)
-                 ->assertJsonStructure(['token', 'user']);
-    }
-
-    public function test_user_cannot_login_with_incorrect_credentials()
-    {
-        $user = UserModel::factory()->create([ // Use the alias instead of 'User'
-            'email' => 'test@example.com',
-            'password' => bcrypt('password')
-        ]);
-
-        $response = $this->postJson('/api/login', [
-            'email' => 'test@example.com',
-            'password' => 'wrongpassword'
-        ]);
-
-        $response->assertStatus(401)
-                 ->assertJson(['error' => 'Unauthorized']);
+        return $this->state(function (array $attributes) {
+            return [
+                'email_verified_at' => null,
+            ];
+        });
     }
 }
