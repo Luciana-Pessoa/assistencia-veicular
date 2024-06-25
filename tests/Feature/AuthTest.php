@@ -13,39 +13,27 @@ class UserFactory extends Factory
 {
     use HasFactory;
 
-    /**
-     * Indica que o endereço de email do modelo deve estar não verificado.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
+    // Remove the duplicate declaration of the unverified function
 
     /**
      * A senha padrão para todos os usuários criados pela fábrica, se não for especificada.
      *
      * @var string|null
      */
-    protected static $password;
+    static $password;
 
     /**
      * Define o estado padrão do modelo.
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    function definition(): array
     {
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => self::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }
@@ -55,7 +43,7 @@ class UserFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function unverified()
+    function unverified()
     {
         return $this->state(function (array $attributes) {
             return [

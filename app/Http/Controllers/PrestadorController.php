@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prestador;
+use Illuminate\Support\Facades\Response;
 
 class PrestadorController extends Controller
 {
@@ -22,7 +23,9 @@ class PrestadorController extends Controller
         ]);
 
         // Cria um novo prestador com os dados validados
-        $prestador = Prestador::create($validatedData);
+        $prestador = new Prestador;
+        $prestador->fill($validatedData);
+        $prestador->save();
 
         // Retorna uma resposta ou redireciona
         return response()->json([
