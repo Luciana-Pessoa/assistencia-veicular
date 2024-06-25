@@ -10,6 +10,14 @@ class Prestador extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 'logradouro', 'bairro', 'numero', 'latitude', 'longitude', 'cidade', 'UF', 'situacao'
+        'nome',
+        'logradouro',
+        'bairro',
+        'numero',
+        'latitude',
+        'longitude',
+        'cidade',
+        'uf',
+        'situacao'
     ];
 }
