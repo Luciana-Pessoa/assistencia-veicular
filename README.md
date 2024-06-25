@@ -66,7 +66,8 @@ A aplicação estará disponível em http://localhost:8000.
 # Endpoints
 ### Autenticação
 ### POST /api/login
-•	Descrição: Autenticação de usuário.
+• Autenticação de usuário.
+
 •	Body:
 ```
 {
@@ -84,7 +85,7 @@ A aplicação estará disponível em http://localhost:8000.
 ```
 ### Listar Serviços
 ### GET /api/servicos
-•	Descrição: Listar serviços disponíveis.
+•	Listar serviços disponíveis.
 •	Headers:
 css
 ```
@@ -103,7 +104,7 @@ Authorization: Bearer {jwt_token}
 ```
 ### Buscar Coordenadas
 ### GET /api/geocode/{endereco}
-•	Descrição: Buscar coordenadas de um endereço.
+•   Buscar coordenadas de um endereço.
 •	Headers:
 ```
 Authorization: Bearer {jwt_token}
@@ -117,7 +118,7 @@ Authorization: Bearer {jwt_token}
 ```
 ### Buscar Prestadores
 ### POST /api/prestadores
-•	Descrição: Buscar prestadores de serviço.
+•   Buscar prestadores de serviço.
 •	Headers:
 ```
 Authorization: Bearer {jwt_token}
@@ -252,4 +253,5 @@ class ServicoPrestadorSeeder extends Seeder
 ### Conclusão
 
 Se precisar de mais detalhes ou ajuda com alguma parte específica do projeto, estarei à disposição! 
+Feito com ❤️ por Luciana Pessoa 👋🏽 Entre em contato!
 
