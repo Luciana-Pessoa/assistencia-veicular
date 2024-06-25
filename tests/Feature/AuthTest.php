@@ -3,14 +3,30 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
  * Factory para a criação de usuários.
- */
 class UserFactory extends Factory
 {
+    use HasFactory;
+
+    /**
+     * Indica que o endereço de email do modelo deve estar não verificado.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function unverified()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_verified_at' => null,
+            ];
+        });
+    }
+
     /**
      * A senha padrão para todos os usuários criados pela fábrica, se não for especificada.
      *
@@ -47,4 +63,3 @@ class UserFactory extends Factory
             ];
         });
     }
-}
