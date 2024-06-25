@@ -149,3 +149,107 @@ Authorization: Bearer {jwt_token}
   ...
 ]
 ```
+### Postman
+## Testes
+Para executar os testes, use o seguinte comando:
+```
+php artisan test
+```
+## Scripts de Seeder
+Aqui está o código para os seeders necessários:
+```
+```
+### // database/seeders/DatabaseSeeder.php
+```
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Prestador;
+use App\Models\Servico;
+use App\Models\ServicoPrestador;
+
+class DatabaseSeeder extends Seeder
+{
+    public function run()
+    {
+        $this->call([
+            PrestadorSeeder::class,
+            ServicoSeeder::class,
+            ServicoPrestadorSeeder::class,
+        ]);
+    }
+}
+```
+// database/seeders/PrestadorSeeder.php
+```
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Prestador;
+
+class PrestadorSeeder extends Seeder
+{
+    public function run()
+    {
+        Prestador::factory()->count(25)->create();
+    }
+}
+```
+// database/seeders/ServicoSeeder.php
+```
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Servico;
+
+class ServicoSeeder extends Seeder
+{
+    public function run()
+    {
+        $servicos = [
+            ['nome' => 'Reboque', 'situacao' => 'ativo'],
+            ['nome' => 'Chaveiro', 'situacao' => 'ativo'],
+            ['nome' => 'Mecânico', 'situacao' => 'ativo']
+        ];
+
+        foreach ($servicos as $servico) {
+            Servico::create($servico);
+        }
+    }
+}
+```
+ // database/seeders/ServicoPrestadorSeeder.php
+```
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Prestador;
+use App\Models\Servico;
+use App\Models\ServicoPrestador;
+
+class ServicoPrestadorSeeder extends Seeder
+{
+    public function run()
+    {
+        $prestadores = Prestador::all();
+        $servicos = Servico::all();
+
+        foreach ($prestadores as $prestador) {
+            foreach ($servicos as $servico) {
+                ServicoPrestador::create([
+                    'prestador_id' => $prestador->id,
+                    'servico_id' => $servico->id,
+                    'km_saida' => rand(10, 50),
+                    'valor_saida' => rand(20, 100),
+                    'valor_km_excedente' => rand(5, 20)
+                ]);
+            }
+        }
+    }
+}
+```
+### Conclusão
+
+Se precisar de mais detalhes ou ajuda com alguma parte específica do projeto, estarei à disposição! 
+
