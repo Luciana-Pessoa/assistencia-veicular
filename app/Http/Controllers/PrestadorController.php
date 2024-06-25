@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prestador;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class PrestadorController extends Controller
 {
@@ -17,22 +17,22 @@ class PrestadorController extends Controller
     public function store(Request $request)
     {
         // Valida os dados do formulário
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome' => 'required|max:255',
             'email' => 'required|email|unique:prestadors,email',
         ]);
 
-        // Cria um novo prestador com os dados validados
-        $prestador = new Prestador;
-        $prestador->fill($validatedData);
-        $prestador->save();
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
-        // Retorna uma resposta ou redireciona
+        // Cria um novo prestador com os dados validados
+        $prestador = Prestador::create($validator->validated());
+
+        // Retorna uma resposta de sucesso
         return response()->json([
             'message' => 'Prestador criado com sucesso!',
             'prestador' => $prestador
         ], 201);
     }
-
-    // Adicione mais métodos conforme necessário...
 }
