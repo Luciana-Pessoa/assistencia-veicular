@@ -11,7 +11,6 @@ Antes de iniciar, certifique-se de que você tem o seguinte instalado:
 - [Composer](https://getcomposer.org/)
 - Um servidor local como [Apache] ou [xampp]
 
-
 ### 🔧 Instalação
 
 ## Configuração Inicial
