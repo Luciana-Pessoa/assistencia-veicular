@@ -5,7 +5,7 @@
 Antes de iniciar, certifique-se de que você tem o seguinte instalado:
 
 - **Laravel:** 9.x
-- **PHP:** 8.2+
+- **PHP:** 8.2
 - **MySQL**
 - [Git](https://git-scm.com/)
 - [Composer](https://getcomposer.org/)
